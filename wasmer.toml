@@ -1,0 +1,24 @@
+[package]
+name = "grand-azure-eventops"
+version = "0.1.0"
+description = "Grand Azure EventOps - Hotel Event & Vendor Management System"
+entrypoint = "serve"
+
+[dependencies]
+"wasmer/static-web-server" = "^1"
+
+[fs]
+"/public" = "dist"
+
+[[command]]
+name = "serve"
+module = "wasmer/static-web-server:webserver"
+runner = "wasi"
+
+[command.annotations.wasi]
+main-args = [
+  "--root",
+  "/public",
+  "--page-fallback",
+  "/public/index.html"
+]
